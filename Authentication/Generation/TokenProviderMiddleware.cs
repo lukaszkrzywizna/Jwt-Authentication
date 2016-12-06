@@ -36,7 +36,7 @@ namespace JwtAuthentication
             }
 
 
-            var username = context.Request.Form["email"];
+            var username = context.Request.Form["username"];
             var password = context.Request.Form["password"];
 
             bool rememberMe;

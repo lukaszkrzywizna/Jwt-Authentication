@@ -1,7 +1,9 @@
 export class Urls {
     // registerUrl = 'api/account/register';
     loginUrl = 'api/token';
-    userResourceUrl = 'api/values/5';
+    userResourceUrl = 'api/user';
+    adminResourceUrl = 'api/admin';
+
 }
 
 export class Configuration{

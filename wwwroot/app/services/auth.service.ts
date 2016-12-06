@@ -20,13 +20,13 @@ export class AuthService {
 
     loginIn(loginModel: LoginModel): Observable<string> {
         if (!loginModel) {
-            let error = new Error("loginModel can not be null");
+            let error = new Error('loginModel can not be null');
             Observable.throw(error);
         } else {
             let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
             let options = new RequestOptions({ headers: headers });
 
-            let encodedLoginRequest = `email=${loginModel.username}&password=${loginModel.password}&rememberMe=${loginModel.rememberMe}`;
+            let encodedLoginRequest = `username=${loginModel.username}&password=${loginModel.password}&rememberMe=${loginModel.rememberMe}`;
 
             return this.http
                 .post(Configuration.urls.loginUrl, encodedLoginRequest, options)
@@ -52,12 +52,23 @@ export class AuthService {
     getUserResource(): Observable<Response> {
         let headers = new Headers();
         headers.append( 'Content-Type', 'application/json');
-        headers.append( 'Authentication', `Bearer ${this.getToken()}`);
+        headers.append( 'Authorization', `Bearer ${this.getToken()}`);
         let options = new RequestOptions({ headers: headers });
 
         return this.http
-        .get(Configuration.urls.userResourceUrl)
+        .get(Configuration.urls.userResourceUrl, options)
         .catch(this.handleError);
+     }
+
+    getAdminResource(): Observable<Response> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', `Bearer ${this.getToken()}`);
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http
+            .get(Configuration.urls.adminResourceUrl, options)
+            .catch(this.handleError);
     }
 
     private handleError(e: Response | any) {
