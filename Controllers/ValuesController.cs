@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JwtAuthentication.Controllers
@@ -18,6 +19,7 @@ namespace JwtAuthentication.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public string Get(int id)
         {
             return "value";

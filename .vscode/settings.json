@@ -1,0 +1,20 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/*.js": { "when": "$(basename).ts"},
+        "**/*.js.map": true,
+        "**/bin": true,
+        "**/obj": true,
+        "**/*.gitignore": true,
+        "**/node_modules": true,
+        "**/typings": true,
+        "**/*.xproj": true,
+        "**/*.xproj.user": true,
+         "**/.vs": true,
+         "**/*.sln": true
+    }
+}

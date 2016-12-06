@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore;
 using System.IO;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace JwtAuthentication
 {
@@ -29,8 +30,11 @@ namespace JwtAuthentication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddIdentity<User, IdentityRole>();
             // Add framework services.
             services.AddMvc();
+
+            services.AddTransient<JwtTokenGenerator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +42,9 @@ namespace JwtAuthentication
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            app.UseMiddleware<TokenProviderMiddleware>();
+            app.UseBearerJwtAuthentication();
 
             app.Use(async (context, next) =>
             {
@@ -51,6 +58,7 @@ namespace JwtAuthentication
                 }
             });
             app.UseStaticFiles();
+            app.UseMvc();
         }
     }
 }

@@ -4,6 +4,7 @@
 wwwroot/app/**/*.js
 wwwroot/app/**/*.map
 wwwroot/lib/
+typings/
 
 # User-specific files
 *.suo
