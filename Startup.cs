@@ -30,7 +30,6 @@ namespace JwtAuthentication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddIdentity<User, IdentityRole>();
             // Add framework services.
             services.AddMvc();
 
@@ -44,7 +43,7 @@ namespace JwtAuthentication
             loggerFactory.AddDebug();
 
             app.UseMiddleware<TokenProviderMiddleware>();
-            app.UseBearerJwtAuthentication();
+            app.UseJwtBearerAuthentication();
 
             app.Use(async (context, next) =>
             {

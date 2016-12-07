@@ -25,7 +25,7 @@ namespace JwtAuthentication
             });
         }
 
-        public static void UseBearerJwtAuthentication(this IApplicationBuilder app)
+        public static void UseJwtBearerAuthentication(this IApplicationBuilder app)
         {
             var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(JwtConfiguration.SecretKey));
             var tokenValidationParameters = GetTokenValidationParameters(signingKey);

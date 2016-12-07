@@ -3,6 +3,7 @@ export class Urls {
     loginUrl = 'api/token';
     userResourceUrl = 'api/user';
     adminResourceUrl = 'api/admin';
+    publicResourceUrl = 'api/public';
 
 }
 

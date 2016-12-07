@@ -22,7 +22,7 @@ namespace JwtAuthentication
         public JwtTokenGenerator()//UserManager<User> userManager)
         {
             //_userManager = userManager;
-            _options = TokenProviderOptions.GeTokenProviderOptions();
+            _options = TokenProviderOptions.GetTokenProviderOptions();
         }
 
         public async Task GenerateToken(HttpContext context, string username, string password, bool rememberMe = false)

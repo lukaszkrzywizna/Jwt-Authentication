@@ -17,7 +17,7 @@ namespace JwtAuthentication
         {
             _next = next;
             _jwtTokenGenerator = jwtTokenGenerator;
-            _options = TokenProviderOptions.GeTokenProviderOptions();
+            _options = TokenProviderOptions.GetTokenProviderOptions();
         }
 
         public Task Invoke(HttpContext context)

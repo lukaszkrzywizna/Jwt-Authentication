@@ -8,6 +8,9 @@ namespace JwtAuthentication
 {
     public class JwtConfiguration
     {
+        /// <summary>
+        /// Our invisible secret :)
+        /// </summary>
         public static readonly string SecretKey = "thisIsMyVerySecretPassword";
         public static readonly string Issuer = "AuthenticationServer";
         public static readonly string Audience = "WeBBMeetUp";

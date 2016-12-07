@@ -11,7 +11,7 @@ namespace JwtAuthentication.Controllers
     public class UserController : Controller
     {
         [HttpGet]
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "User,Admin")]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };

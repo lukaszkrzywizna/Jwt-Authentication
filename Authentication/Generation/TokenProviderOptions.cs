@@ -20,7 +20,7 @@ namespace JwtAuthentication
         public SigningCredentials SigningCredentials { get; set; }
 
         private static TokenProviderOptions _instance;
-        public static TokenProviderOptions GeTokenProviderOptions()
+        public static TokenProviderOptions GetTokenProviderOptions()
         {
             if (_instance == null)
             {

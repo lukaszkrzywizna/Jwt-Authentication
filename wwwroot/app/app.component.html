@@ -1,11 +1,98 @@
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <div class="page-header">
-            <h1 class="title-header">JWT Authentication</h1>
-            <h2 class="subtitle-header">Use inputs below to generate/use JWT token</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="page-header">
+                <h1 class="title-header">{{resources.title}}</h1>
+                <h2 class="subtitle-header">{{resources.subtitle}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-login">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a href="#" class="active" id="login-form-link">{{resources.login}}</a>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="panel-body">
+                    <div class="error-alert text-center" [hidden]="loginValidResponse">{{loginResponse}}</div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form id="login-form" #loginForm="ngForm" role="form" style="display: block;">
+
+                                <div class="form-group">
+                                    <input type="text" name="login-username" id="login-username" #loginusername="ngModel" required tabindex="1" class="form-control"
+                                        placeholder="{{resources.usernameAddress}}" [(ngModel)]="loginModel.username">
+                                    <div [hidden]="loginusername.valid || loginusername.pristine" class="error-alert">{{resources.usernameRequired}}</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" name="login-password" id="login-password" #loginPassword="ngModel" required minLength="6" maxlength="15"
+                                        tabindex="2" class="form-control" placeholder="{{resources.password}}" [(ngModel)]="loginModel.password">
+                                    <div [hidden]="loginPassword.valid || loginPassword.pristine" class="error-alert">{{resources.passwordRequired}}</div>
+                                </div>
+
+                                <div class="form-group text-center">
+                                    <input type="checkbox" tabindex="3" class="" name="remember" id="remember" [(ngModel)]="loginModel.rememberMe">
+                                    <label for="remember"> {{resources.rememberMe}}</label>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <input type="submit" name="login-submit" id="login-submit" [disabled]="!loginForm.valid" tabindex="4" class="form-control btn btn-login"
+                                                value="{{resources.logIn}}" (click)="loginRequest()">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="text-center">
+                                            <p style="word-wrap: break-word; font-style: italic;">{{jwt}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <button class="form-control btn btn-resource" (click)="getPublicResource()">Pobierz zasób publiczny</button>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <p style="word-wrap: break-word; font-style: italic;">{{publicResponse}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <button class="form-control btn btn-resource" (click)="getUserResource()">Pobierz zasób użytkownika</button>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <p style="word-wrap: break-word; font-style: italic;">{{userResponse}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <button class="form-control btn btn-resource" (click)="getAdminResource()">Pobierz zasób administratora</button>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <p style="word-wrap: break-word; font-style: italic;">{{adminResponse}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-<p style="word-wrap:break-word">{{jwt}}</p>
-<button class="btn btn-default" (click)="getUserResource()">Get Resource</button>

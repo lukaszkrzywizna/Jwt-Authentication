@@ -1,0 +1,14 @@
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 50px;
+}
+
+body {
+    background : url(../resources/images/mountain.jpg) no-repeat center center fixed;
+    background-size: cover;
+    padding-top: 10px;
+	font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+}

@@ -12,6 +12,7 @@ export class AuthService {
     constructor(
         private http: Http) {
         this.loggedIn = this.checkAccessTokenExists();
+        this.logOut();
     }
     
     checkAccessTokenExists(): boolean {
@@ -50,43 +51,34 @@ export class AuthService {
     }
 
     getUserResource(): Observable<Response> {
-        let headers = new Headers();
-        headers.append( 'Content-Type', 'application/json');
-        headers.append( 'Authorization', `Bearer ${this.getToken()}`);
-        let options = new RequestOptions({ headers: headers });
-
-        return this.http
-        .get(Configuration.urls.userResourceUrl, options)
-        .catch(this.handleError);
+        return this.bearerRequest(Configuration.urls.userResourceUrl);
      }
 
     getAdminResource(): Observable<Response> {
+        return this.bearerRequest(Configuration.urls.adminResourceUrl);
+    }
+
+    getPublicResource(): Observable<Response> {
+        return this.http
+            .get(Configuration.urls.publicResourceUrl)
+            .catch(this.handleError);
+    }
+
+    private bearerRequest(url: string): Observable<Response>{
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', `Bearer ${this.getToken()}`);
         let options = new RequestOptions({ headers: headers });
 
         return this.http
-            .get(Configuration.urls.adminResourceUrl, options)
+            .get(url, options)
             .catch(this.handleError);
     }
 
     private handleError(e: Response | any) {
-        let errMsg: string;
-        let errorCode: number;
-        
-        if (e instanceof Response) {
-            const error = e.json() || '';
-            errMsg = `${error.status} - ${error.statusText || ''} ${e}`;
-            errorCode = error.errorCode;
-        } else {
-            errMsg = e.message ? e.message : e.toString();
-            errorCode = 1;
-        }
+        console.log(`Problem during getting register request: ${e}`);
 
-        console.log(`Problem during getting register request: ${errMsg}`);
-
-        return Observable.throw(errorCode);
+        return Observable.throw(new Error(`Status: ${e.status} StatusText: ${e.statusText}`));
     }
 
     isLogged(): boolean {
